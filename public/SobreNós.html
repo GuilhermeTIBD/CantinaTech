@@ -1,0 +1,259 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['RA']) || !isset($_SESSION['Nome'])) {
+    // Redireciona para a página de login se a sessão não estiver definida
+    header('Location: tela_cadastro.php');
+    exit();
+}
+
+?>
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png"  href="img/android-chrome-512x512.png">
+    <title>Loja</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #000000;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #222;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(175, 255, 2, 0.8); /* Adicionando uma sombra */
+            border-radius: 10px; /* Opcional: adicionando bordas arredondadas */
+            overflow: hidden; /* Para ocultar a sombra fora do elemento */
+        }
+
+        header h2 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        nav#menu {
+            margin-top: 10px;
+        }
+
+        nav#menu ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav#menu ul li {
+            margin: 0;
+        }
+
+        nav#menu ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1em;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #444;
+            transition: background-color 0.3s ease;
+            
+        }
+
+        nav#menu ul li a:hover {
+            background-color: #666;
+        }
+
+        #boasvindas {
+            background-color: #e74c3c;
+            color: #fff;
+            padding: 15px;
+            margin: 20px auto;
+            text-align: center;
+            width: 200px;
+            border-radius: 10px;
+            font-size: 1.5em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.8); /* Adicionando uma sombra */
+            border-radius: 10px; /* Opcional: adicionando bordas arredondadas */
+            overflow: hidden; /* Para ocultar a sombra fora do elemento */
+        }
+
+        .lista_produtos {
+            display: grid;
+            
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .produto_item {
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.8); 
+            border-radius: 10px; /* Opcional: adicionando bordas arredondadas */
+            overflow: hidden; /* Para ocultar a sombra fora do elemento */
+            background-color: #fff;
+            
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .produto_item:hover {
+            transform: translateY(-5px);
+            
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .produto_item h1 {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .produto_item p {
+            margin-bottom: 15px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-size: 1em;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .cookie-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 15px 20px;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .cookie-bar p {
+            margin: 0;
+            display: inline-block;
+        }
+
+        .cookie-bar button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+
+        .cookie-bar button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h2>SOBRE NÓS</h2>
+        <nav id="menu">
+            <ul>
+                    <li><a href="INICIOlogin.html">Inicio</a></li>
+                    <li><a href="prod.html">Produto</a></li>
+                    <li><a href="NossoAplicativo.html" class="hover:text-yellow-500 transition active">Nosso Aplicativo</a></li>
+                     
+            </ul>
+        </nav>
+       
+    </header>
+    <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+
+    <div id="boasvindas">
+        Bem-vindo!
+    </div>
+
+    <div class="lista_produtos">
+        <div class="produto_item">
+            <h1>👤Quem Somos?</h1>
+            <p>Somos uma equipe apaixonada por alimentação e pela arte de proporcionar momentos deliciosos aos nossos clientes. Fundada em 2025, a Cantina Tech nasceu do sonho de trazer um cardápio diferente para nossos alunos e inovar cada vez mais nossa escola.</p>
+            <p>Nossos cardápios são cuidadosamente elaborados para atender a todos os paladares, oferecendo uma variedade de opções frescas e saudáveis, desde pratos tradicionais até criações inovadoras. Priorizamos ingredientes de alta qualidade e técnicas culinárias artesanais para garantir que cada refeição seja uma verdadeira celebração do bom gosto.</p>
+        </div>
+
+        <div class="produto_item">
+            <h1>📞Suporte</h1>
+            <p>Nossa equipe dedicada trabalha arduamente para garantir que cada refeição seja uma experiência memorável. Se você tiver alguma dúvida sobre nosso menu, ingredientes ou opções especiais, não hesite em perguntar. Estamos aqui para ajudar e tornar sua visita o mais agradável possível.</p>
+            <p><b>📧 Cantinatech@gmail.com </b></p>
+            <p><b>📤 (11) 4032-9802</b></p>
+        </div>
+
+        <div class="produto_item">
+            <h1>👨‍💻Funcionalidade</h1>
+            <p><b>Nosso sistema contará com telas de cadastro, login para cada aluno, recomendações do dia, sistema de reserva e pretendemos implementar formas de pagamento para facilitar a retirada, além de outras ideias que nossa equipe está planejando.</b></p>
+        </div>
+
+        <div class="produto_item">
+            <h1>💨Localização</h1>
+            <p>📌 R. Francisco Falcato Júnior, 465 - Patrocinio, Itu - SP, 13304-170</p>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117290.2073439945!2d-47.443518056640656!3d-23.267856599999984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cf5004d1480d23%3A0x2495bd197b4c49cf!2sCEUNSP%20-%20ITU%20ll!5e0!3m2!1spt-BR!2sbr!4v1746743613626!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+
+    <div class="cookie-bar" id="cookieBar">
+        <p>Nosso site utiliza cookies para garantir a melhor experiência para você. Ao continuar navegando, você concorda com o uso de cookies.</p>
+        <button onclick="aceitarCookies()">Aceitar</button>
+    </div>
+
+    <script>
+        function aceitarCookies() {
+            // Esconde a barra de cookies
+            document.getElementById("cookieBar").style.display = "none";
+            // Armazena a aceitação do usuário em localStorage ou cookie
+            // Aqui você pode adicionar a lógica para armazenar a aceitação do usuário
+        }
+    </script>
+
+</body>
+
+</html>

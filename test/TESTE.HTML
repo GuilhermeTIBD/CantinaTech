@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechNova - Inovação em Tecnologia</title>
+  <style>
+    :root {
+      --cor-primaria: #1a73e8;
+      --cor-secundaria: #ffffff;
+      --cor-escura: #0f1115;
+      --cor-texto: #444;
+      --padding: 2rem;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--cor-secundaria);
+      color: var(--cor-texto);
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--cor-escura);
+      color: var(--cor-secundaria);
+      padding: 1rem var(--padding);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--cor-primaria);
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: var(--cor-secundaria);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--cor-primaria);
+    }
+
+    .hero {
+      background: linear-gradient(to right, #1a73e8, #004aad);
+      color: white;
+      padding: 6rem var(--padding);
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      background-color: white;
+      color: #1a73e8;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #f1f1f1;
+    }
+
+    .section {
+      padding: 4rem var(--padding);
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section h3 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #1a73e8;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .card {
+      background: #f9f9f9;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      flex: 1 1 300px;
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    footer {
+      background-color: #0f1115;
+      color: #ccc;
+      text-align: center;
+      padding: 2rem var(--padding);
+      font-size: 0.9rem;
+    }
+
+    .menu-mobile {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .menu-mobile span {
+      background-color: white;
+      height: 3px;
+      width: 25px;
+      margin: 4px 0;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        background-color: var(--cor-escura);
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        padding: 1rem;
+      }
+
+      nav.show {
+        display: flex;
+      }
+
+      .menu-mobile {
+        display: flex;
+      }
+
+      .hero h2 {
+        font-size: 2rem;
+      }
+
+      .section h3 {
+        text-align: center;
+      }
+
+      .features {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>TechNova</h1>
+    <div class="menu-mobile" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav id="nav">
+      <a href="#sobre">Sobre</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Transformamos Ideias em Tecnologia</h2>
+    <p>Desenvolvimento de soluções digitais inovadoras para empresas modernas.</p>
+    <button class="btn" onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})">Fale Conosco</button>
+  </section>
+
+  <section id="sobre" class="section">
+    <h3>Quem Somos</h3>
+    <p>A TechNova é uma empresa especializada em soluções tecnológicas personalizadas. Atuamos com desenvolvimento de sistemas web, aplicativos móveis, e integração de dados, entregando inovação com excelência.</p>
+  </section>
+
+  <section id="servicos" class="section">
+    <h3>Nossos Serviços</h3>
+    <div class="features">
+      <div class="card">
+        <h4>Desenvolvimento Web</h4>
+        <p>Sites, sistemas e plataformas personalizadas com foco em performance e usabilidade.</p>
+      </div>
+      <div class="card">
+        <h4>Aplicativos Mobile</h4>
+        <p>Apps nativos e híbridos com alta performance para Android e iOS.</p>
+      </div>
+      <div class="card">
+        <h4>Consultoria</h4>
+        <p>Ajudamos sua empresa a inovar com as melhores práticas em tecnologia e transformação digital.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato" class="section">
+    <h3>Entre em Contato</h3>
+    <form onsubmit="enviarFormulario(event)">
+      <input type="text" id="nome" placeholder="Seu nome" required style="padding:10px;width:100%;margin-bottom:1rem;" />
+      <input type="email" id="email" placeholder="Seu e-mail" required style="padding:10px;width:100%;margin-bottom:1rem;" />
+      <textarea id="mensagem" placeholder="Digite sua mensagem" rows="5" required style="padding:10px;width:100%;margin-bottom:1rem;"></textarea>
+      <button type="submit" class="btn">Enviar</button>
+    </form>
+  </section>
+
+  <footer>
+    &copy; 2025 TechNova. Todos os direitos reservados.
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('nav');
+      nav.classList.toggle('show');
+    }
+
+    function enviarFormulario(event) {
+      event.preventDefault();
+      const nome = document.getElementById('nome').value;
+      const email = document.getElementById('email').value;
+      const msg = document.getElementById('mensagem').value;
+
+      if (nome && email && msg) {
+        alert(`Obrigado pelo contato, ${nome}! Em breve retornaremos no e-mail: ${email}`);
+        document.querySelector('form').reset();
+      } else {
+        alert("Por favor, preencha todos os campos.");
+      }
+    }
+  </script>
+
+</body>
+</html>

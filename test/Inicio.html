@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cantina Tia Lina</title>
+    <link rel="stylesheet" href="styles.css"  >
+    <link rel="stylesheet" href="lalala.css">
+</head>
+<body>
+    <script>window.alert('Seja-Bem-vindo ao nosso site!!')</script>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+header {
+    background-color: #8B0000;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative; /* Adicione esta linha */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 180px; /* Ajuste conforme necessário */
+    height: auto; /* Ajuste conforme necessário */
+    margin-right: 20px; /* Espaçamento entre a logo e o menu */
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+header nav ul li {
+    margin-left: 20px;
+}
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+section {
+    padding: 40px 20px;
+}
+#home {
+    background: url('images/restaurant.jpg') no-repeat center center;
+    background-size: cover;
+    color: white;
+    text-align: center;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: fadeIn 3s;
+}
+#home h1 {
+    font-size: 3em;
+}
+#menu, #emporio, #eventos, #contato {
+    background-color: #000000;
+    margin: 20px 0;
+}
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+#background-images {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease;
+    filter: brightness(60%); /* Ajuste o valor conforme necessário para diminuir o brilho */
+}
+
+.active {
+    opacity: 1;
+}
+
+
+.active {
+    opacity: 1;
+}
+.text-content {
+    position: relative;
+    z-index: 1; /* Define uma camada superior para o texto */
+}
+.produto_item {
+            margin: 18px;
+            padding: 18px;
+            background-color: rgb(79, 9, 9);
+            border-style: solid;
+            border-width: 3px;
+            border-radius: 12px;
+        }
+#background-images {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+header {
+    background-color: #8B0000;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative; /* Adicione esta linha */
+    z-index: 2; /* Defina um valor maior para o z-index do header */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 180px; /* Ajuste conforme necessário */
+    height: auto; /* Ajuste conforme necessário */
+    margin-right: 20px; /* Espaçamento entre a logo e o menu */
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+header nav ul li {
+    margin-left: 20px;
+}
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.active {
+    opacity: 1;
+}
+.form-container {
+            background-color: #cacaca;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-container h2 {
+            margin-top: 0;
+        }
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-container form input,
+        .form-container form textarea,
+        .form-container form button {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+        }
+ 
+nav ul li {
+    display: inline;
+    margin-right: 10px; /* Adicione a margem desejada entre os botões */
+}
+
+nav ul li:last-child {
+    margin-right: 0; /* Para remover a margem do último botão */
+}
+        .form-container form button {
+            background-color: #8B0000;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-container form button:hover {
+            background-color: #5A0000;
+        }
+        header nav {
+    flex-grow: 1;
+    text-align: center;
+}
+
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-flex; /* Altere para "inline-flex" */
+    justify-content: center; /* Centralize os itens */
+}
+
+        header nav {
+    flex-grow: 1;
+    text-align: center;
+}
+
+
+    </style>
+    <header>
+        <div class="logo">
+          
+            
+            <img src="img/Slide1__1_-removebg-preview.png" class="img1">
+        </div>
+        <div id="menu-links">
+            <nav>
+                <ul>
+                    <li><a href="Inicio.html">Home</a></li>
+                    <li><a href="prod.html">Produtos</a></li>
+                    <li><a href="Sobre Nós.html">Sobre Nós(contato)</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="login-button">
+            <button><a href="tela_cadastro.html">Entrar</a></button>
+        </div>
+    </header>
+    
+    <section id="home">
+        <div id="background-images">
+            <img src="img/woman-4246954_1920.jpg" class="background-image active">
+            <img src="img/iiiioo.jpg" class="background-image">
+            <!-- Adicione mais imagens conforme necessário -->
+        </div>
+        <div class="text-content">
+            <h1>Bem-vindo à Cantina Rlt</h1>
+            <p>A Cantina mais Completa pra você.</p>
+        </div>
+    </section>
+    <center> <h1 class="texto2" >A Melhor Cantina fica em nossa escola, venha conhecer!</h1> </center>
+    <div class="lista_produtos">
+        <div class="produto_item">
+            <h1 style="color: beige;">Mais que uma Cantina,
+                uma experiência</h1>
+            
+            <br>
+            
+            <p  style="color: rgb(231, 231, 231);" >Horário
+                
+                Segunda a Sexta-feira | 16h30 às 21h15
+                <br>
+                <br>
+                Sábados, Domingos e Feriados | Fechado</p>
+                
+        <br>
+        
+        </div>
+   
+   
+</article>
+        <form>
+            
+                </form>
+                
+            </section>
+            <section id="contato">
+                <div class="form-container" >
+                    <h2>Fale Conosco</h2>
+                    <form>
+                        <input type="text" name="nome" placeholder="Nome" required>
+                        <input type="email" name="email" placeholder="E-mail" required>
+                        <input type="text" name="assunto" placeholder="Assunto" required>
+                        <textarea name="mensagem" rows="5" placeholder="Mensagem" required></textarea>
+                        <button type="submit">Enviar</button>
+                    </form>
+                <center> <p>Localização e informações de contato. <br>
+                    Logo Abaixo ⬇️
+                </p></center>
+                </div>
+            </section>
+        </form>
+        <center><p style="color: antiquewhite;">📌R. Francisco Falcato Júnior, 465 - São Luiz, Itu - SP, 13304-170 📧RltRogerioCantina@gmail.com
+
+
+            📤(11)4032-9802</p></center>
+    </section>
+    
+    
+    <script >
+        document.addEventListener("DOMContentLoaded", function() {
+    const menuLinks = document.getElementById("menu-links").querySelectorAll("a");
+
+    // Desativa os links do menu
+    function disableMenuLinks() {
+        menuLinks.forEach(link => {
+            link.addEventListener("click", function(event) {
+                event.preventDefault(); // Impede o comportamento padrão do link
+                alert("Faça o login para acessar esta página."); // Exibe uma mensagem de alerta
+            });
+        });
+    }
+
+    // Ativa os links do menu
+    function enableMenuLinks() {
+        menuLinks.forEach(link => {
+            link.removeEventListener("click", function(event) {
+                event.preventDefault();
+                alert("Faça o login para acessar esta página.");
+            });
+        });
+    }
+
+    // Chamada de função para desativar os links do menu no início
+    disableMenuLinks();
+
+    // Adicione a lógica de login, onde você pode chamar enableMenuLinks() quando o usuário fizer o login com sucesso.
+});
+
+        document.addEventListener("DOMContentLoaded", function() {
+    const images = document.querySelectorAll(".background-image");
+    let currentIndex = 0;
+
+    function showImage(index) {
+        images.forEach((image, i) => {
+            if (i === index) {
+                image.classList.add("active");
+            } else {
+                image.classList.remove("active");
+            }
+        });
+    }
+
+    function nextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        showImage(currentIndex);
+    }
+
+    function prevImage() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        showImage(currentIndex);
+    }
+
+    // Intervalo para trocar as imagens automaticamente
+    setInterval(nextImage, 5000);
+
+    // Adicionando setas para trocar manualmente
+    
+
+    const nextButton = document.createElement("button");
+    nextButton.innerText = "►";
+    nextButton.classList.add("next-button");
+    nextButton.addEventListener("click", nextImage);
+    homeSection.appendChild(nextButton);
+});
+
+
+    </script>
+</body>
+</html>

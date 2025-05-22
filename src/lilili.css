@@ -1,0 +1,414 @@
+html,
+body {
+    scroll-behavior: smooth;
+    height: auto;
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;
+    overflow:inherit;
+    overflow-x: hidden;
+    background-color: #fff;
+    color: #A57C52;
+    scrollbar-width: thin;/* "auto" or "thin" */
+    scrollbar-color: #001B71 #fff;/* scroll thumb and track */
+}
+body::-webkit-scrollbar {
+ z-index: 9999999;
+ width: 12px;               /* width of the entire scrollbar */
+}
+body::-webkit-scrollbar-track {
+  background: #F6F2EE;        /* color of the tracking area */
+
+}
+body::-webkit-scrollbar-thumb {
+  	background-color: #A57C52;    /* color of the scroll thumb */
+	border-left: 2px solid #F6F2EE;
+}
+/*HEAD CONTATO*/
+.head-contato{
+    background-color: #F6F2EE;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 10px;
+}
+/*NAVBAR*/
+/*.navbar{
+    margin-top: 50px;
+}*/
+.navbar-light .navbar-toggler {
+	border: none !important;
+    border-color: #F6F2EE;
+}
+.navbar-nav > li > a{
+    color: #A57C52 !important;
+    transition: .2s;
+	font-weight: 400 !important;
+	font-size: 14px !important;
+    transition: .2s;
+}
+.navbar-nav > li > a:hover{
+    color: #572C16 !important;
+    border-bottom: solid 1px #572C16;
+    transition: .2s;
+}
+.navbar-brand{
+    margin-left: 5% !important;
+}
+.active > a{
+    border-bottom: solid 1px #A57C52;
+}
+/*BANNER*/
+.banner{
+    width: 100%;
+    height: 650px;
+	background-image: url('../images/home.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    padding-top: 250px;
+}
+/*CAROUSEL*/
+.carousel,
+.item,
+.active {
+    height: 100%;
+}
+.carousel-altura{
+    height: 60vh;
+    width: 100%;
+}
+.carousel-inner {
+    height: 100%;
+    width: 100%;
+}
+.fill {
+    width: 100%;
+    height: 100%;
+    background-position: bottom center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.carousel-indicators [data-bs-target] {
+    box-sizing: content-box;
+    flex: 0 1 auto;
+    width: 10px; /* change width */
+    height: 10px; /* change height */
+    padding: 0;
+    margin-right: 3px;
+    margin-left: 3px;
+    text-indent: -999px;
+    cursor: pointer;
+    background-color: transparent;
+    background-clip: padding-box;
+    border: 1px solid #fff;
+    opacity: .2;
+    transition: opacity .6s ease;
+    border-radius: 100%; 
+}
+.carousel-indicators>.active{
+    background-color: #A57C52 !important;
+	opacity: 1;
+}
+/*CONTEUDO*/
+a{
+    color: #A57C52;
+    text-decoration: none;
+    text-decoration-line: none;
+    text-decoration-color: #A57C52 !important;
+}
+a:hover{
+    color: #A57C52;
+}
+article{
+    padding: 50px 0;
+}
+.botao-marrom:hover{
+	color: #fff !important;
+    transition: .2s;
+    background-color: #572C16 !important;
+}
+.botao-reserva:hover{
+	color: #fff !important;
+    transition: .2s;
+    background-color: #A57C52 !important;
+}
+button:hover{
+	color: #fff !important;
+    background-color: #F9F9F9;
+    transition: .5s;
+}
+.benvenuto{
+    background-color: #F6F2EE;
+    width: 100%;
+    height: 200px;
+    background-image: url('../images/benvenuto.svg');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.sempre-gigio{
+    background-color: #F6F2EE;
+    width: 100%;
+    height: 300px;
+    background-image: url('../images/sempregigio.svg');
+    background-size: 25%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.evento{
+    background-color: #F6F2EE;
+    width: 100%;
+    height: 300px;
+    background-image: url('../images/evento.svg');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.bloco-txt{
+    padding: 50px;
+}
+h1{
+    font-size: 30px;
+    font-weight: 700;
+}
+h2{
+    color: #5F5C59;
+    font-size: 14px;
+    font-weight: 600;
+}
+.texto-corrido{
+    color: #5F5C59;
+    font-size: 16px;
+    padding-top: 15px;
+    text-align: left;
+}
+txt-pequeno{
+    font-size: 14px;
+    padding-top: 0;
+    text-align: left;
+}
+.txt-right{
+    height: 350px;
+    padding: 80px;
+    position: relative;
+    float: right;
+}
+.card-border:hover{
+    background-color: #F9F9F9;
+    transition: .2s;
+}
+.card-border{
+    transition: .2s;
+    border: 1px solid #A57C52;
+    height: 100px;
+}
+.height{
+    height: 270px;
+}
+#contato{
+    width: 100%;
+    border-top: 1px solid #A57C52;
+    border-bottom: 1px solid #A57C52;
+    padding: 80px;
+}
+.accordion-collapse {
+    border: none !important;
+}
+.accordion-button{
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid #A57C52;
+    border-radius: 0 !important;
+}
+.accordion-button:not(.collapsed){
+    background-color: #fff;
+    border-radius: 0;
+    /*border-top: 1px solid #A57C52;*/
+}
+.accordion-button:not(.collapsed)::after {
+    background-image: url('../images/sub.svg');
+}
+.accordion-button::after {
+    background-image: url('../images/add.svg');
+}
+.legenda-cardapio{
+    background-color: #F6F2EE;
+    width: 100%;
+    height: auto;
+    padding: 30px 10% 30px 10%;
+    margin-bottom: 30px;
+}
+.line{
+    margin: 20px 0 20px 0;
+    border-top: 1px solid #A57C52;
+	border-bottom: none;
+	border-right: none;
+	border-left: none;
+}
+.item-cardapio{
+    border-top: 1px solid #F6F2EE;
+    padding: 20px 10% 0 10%;
+    height: auto;
+    color: #5F5C59;
+}
+.titulo-cardapio{
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+.ingredientes-cardapio{
+    font-size: 14px;
+}
+.preco-cardapio{
+    text-align: right;
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 15px;
+}
+.bg-marrom{
+    height: auto;
+    padding: 70px;
+    background-color: #F6F2EE;
+    margin-top: 30px;
+}
+.pagamento{
+    background-image: url('../images/pagamento.svg');
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 250px;
+}
+.card-delivery{
+    margin-top: 50px;
+    margin-right: 30px;
+    margin-bottom: 50px;
+}
+.img-delivery{
+	width: 70%;
+	height: 450px;
+	background-image: url('../images/delivery.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.botao-tree{
+	width: 25%;
+	height: 60px;
+	padding: 17px 5%;
+	border: 1px solid #A57C52;
+	color: #A57C52;
+	background-color: #FFF;
+	transition: .2s;
+	border-radius: 5px;
+	margin-bottom: 20px
+}
+.botao-tree:hover{
+	background-color: #A57C52;
+	color: #FFF;
+	transition: .2s;
+}
+
+/*FORM*/
+.form-control{
+    background-color: #F6F2EE !important;
+    border: none;
+}
+/*BACK-TOP*/
+.back-top{
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    bottom: 50px;
+    right: 0px;
+    float: right;
+    background-color: #A57C52;
+	opacity: .3;
+    transition: .2s;
+}
+.back-top:hover{
+    /*height: 80px;*/
+    width: 80px;
+    background-color: #A57C52;
+	opacity: 1;
+    transition: .2s;
+}
+/*MEDIAS*/
+@media screen and (max-width: 720px){
+    .banner{
+        height: 250px;
+        background-size: 155%;
+        background-position: bottom center;
+        padding-top: 0px;
+    }
+	.height-imagem{
+		height: 250px !important;
+	}
+	#carousel-altura{
+    height: 25vh;
+	}
+    .benvenuto, .evento{
+        background-size: 150%;
+		height: 200px;
+    }
+    .sempre-gigio{
+        background-size: 80%;
+    }
+    #contato{
+        padding: 80px 40px;
+        }
+    .bg-marrom{
+        padding: 35px;
+    }
+    .pagamento{
+    background-image: url('../images/pagamento-mobile.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 200px;
+    }
+    iframe{
+        margin-top: 30px;
+    }
+    .imagem-padrao{
+        width: 90%;
+    }
+    .card-delivery{
+        margin-top: 30px;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .txt-right{
+    height: 350px;
+    padding: 40px;
+    position:inherit;
+    float:inherit;
+    }
+    .bloco-txt{
+        padding: 30px 20px;
+    }
+    .navbar-nav{
+        height: 100vh !important;
+    }
+    .carousel, .iten, .active{
+        height: auto;
+    }
+	.img-delivery{
+	width: 80%;
+	height: 250px;
+	background-image: url('../images/delivery-mobile.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+	}
+	.botao-tree{
+		width: 90%;
+	}
+    }

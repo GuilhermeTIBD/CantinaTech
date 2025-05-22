@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apenas Administradores</title>
+    <link rel="stylesheet" href="/src/style.css">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #1e1e1e, #2b2b2b);
+            color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        h1 {
+            color: #f39c12;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+            margin-bottom: 20px;
+        }
+        .btn-primary, .form-control {
+            margin: 10px auto;
+            display: block;
+        }
+        .box-search {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .total {
+            font-size: 1.8rem;
+            margin: 20px 0;
+            font-weight: bold;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+        }
+        button {
+  background-color: #ec9304; /* Define a cor de fundo do botão como laranja */
+  color: black; /* Define a cor do texto do botão como preto */
+  border: none; /* Remove a borda padrão do botão */
+  padding: 15px 25px; /* Define o espaçamento interno do botão */
+  cursor: pointer; /* Altera o cursor para ponteiro ao passar o mouse */
+  border-radius: 10px; /* Arredonda as bordas do botão */
+  font-size: 1.1rem; /* Define o tamanho da fonte do texto do botão */
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s; /* Define animações de transição para as propriedades */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Adiciona uma sombra ao botão */
+  width: 350px; /* Define a largura do botão */
+  text-align: center; /* Centraliza o texto dentro do botão */
+}
+
+button:hover {
+  background-color: #f3b225; /* Altera a cor de fundo para um tom mais claro ao passar o mouse */
+  transform: translateY(-2px); /* Aplica um efeito de elevação ao botão */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7); /* Aumenta a sombra ao passar o mouse */
+}
+
+.btn-container {
+  display: flex; /* Define o container como flexível */
+  flex-direction: column; /* Alinha os itens na vertical */
+  align-items: center; /* Centraliza os itens horizontalmente */
+}
+
+.btn-container a {
+  text-decoration: none; /* Remove a decoração (sublinhado) dos links */
+  margin: 10px 0; /* Define uma margem vertical entre os links */
+}
+
+        
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+            
+        }
+          
+
+    </style>
+</head>
+<body>
+        <div class="left">
+            <h1>QUAL TELA DESEJA ACESSAR?</h1>
+            <div class="btn-container">
+                <a href="INICIOlogin.php"><button>ACESSO AO SITE</button></a>
+                <a href="sistema.php"><button>SISTEMA DE ALUNOS</button></a>
+                <a href="estoque.php"><button>GERENCIAMENTO DE ESTOQUE</button></a>
+                <a href="gerenciamento.html"><button>GERENCIAMENTO DE PAGAMENTO</button></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Estoque</title>
+</head>
+<body>
+    <h1>Teste de Atualização de Estoque</h1>
+    <div>
+        <p><strong>Produto:</strong> Produto Teste</p>
+        <p id="estoque">Quantidade em estoque: 10</p>
+        <button onclick="adicionarAoCarrinho(1)">Adicionar ao Carrinho</button>
+    </div>
+
+    <script>
+        function adicionarAoCarrinho(produtoId) {
+            fetch('atualizar_estoque_teste.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id: produtoId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Produto adicionado ao carrinho!');
+                    document.getElementById('estoque').textContent = `Quantidade em estoque: ${data.novaQuantidade}`;
+                } else {
+                    alert(`Erro: ${data.message}`);
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Erro ao processar sua solicitação.');
+            });
+        }
+    </script>
+</body>
+</html>

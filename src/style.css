@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+body{
+  background-color: #ffffff;
+}
+.menu {
+  width: 100%;
+  text-align: right;
+}
+
+.menu a {
+  color:#a89f41;
+  text-decoration: none;
+  font-weight: bold;
+  margin-right: 15px;
+}
+
+.texto-sobre {
+  margin-top: 60px;
+}
+
+.texto-sobre h1 {
+  font-size: 50px;
+}
+
+.texto-sobre p {
+  margin: 30px 0;
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+  font-weight: bold;
+  max-width: 800px;
+  
+}
+
+.texto-sobre button {
+  border: 0;
+  background-color:#b5af6e;
+  color: white;
+  border-radius: 10px;
+  width: 100px;
+  height: 30px;
+  cursor: pointer;
+}
+
+h1 {
+  color:black;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+
+}
+h2{
+  color:#95905a;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+.card {
+  background-color: hsla(64, 18%, 81%, 0.82);
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  padding: 5px;
+  margin: 20px;
+  display: inline-block;
+  vertical-align: center; 
+  text-align: center;
+  word-break: break-all; 
+}
+.card h4{
+  font-size: 15px;
+  text-align: center;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+footer {
+
+  text-align: center;
+    padding: 2s0px;
+  margin: 20px;
+  background-color:  hsla(64, 18%, 81%, 0.82);
+  
+  }
+  .card:hover img {
+transform:scale(1.02) ;
+
+  }

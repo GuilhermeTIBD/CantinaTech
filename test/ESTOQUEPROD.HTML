@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Estoque</title>
+    <style>
+        /* Fontes externas para um design moderno */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        /* Resetando margens e padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Estilos gerais do corpo */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f7f8fa;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Ajuste para evitar cortes */
+            min-height: 100vh;
+            padding: 40px 0;
+        }
+
+        .container {
+            background-color: #fff;
+            width: 90%;
+            max-width: 1200px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 30px;
+            font-size: 26px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Estilos da tabela */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        table thead {
+            background: linear-gradient(135deg, #007BFF, #00aaff);
+            color: white;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        th {
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+        }
+
+        td {
+            color: #555;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fb;
+        }
+
+        tr:hover {
+            background-color: #eef1f7;
+            transition: background-color 0.2s ease;
+        }
+
+        /* Status com estilo visual avançado */
+        .status {
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .status-disponivel {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .status-esgotado {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .tabs button {
+            padding: 15px 30px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            transition: background-color 0.3s, transform 0.2s;
+            outline: none;
+        }
+
+        .tabs button:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+
+        .tabs button.active {
+            background-color: #0056b3;
+        }
+
+        .tabs a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Ajustes de espaçamento para os botões */
+        .tabs {
+            margin-bottom: 60px;
+        }
+
+        /* Animações suaves */
+        .container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 20px;
+            }
+
+            th, td {
+                padding: 12px;
+                font-size: 14px;
+            }
+
+            .tabs button {
+                padding: 12px 24px;
+                font-size: 16px;
+            }
+
+            .tabs {
+                flex-direction: column;
+            }
+
+            .tabs button {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Abas de navegação -->
+        <div class="tabs">
+            <button onclick="mostrarAba('stock')" class="active">Estoque Atual</button>
+            <button><a href="admin.html">Sair</a></button>
+        </div>
+
+        <!-- Estoque Atual Section -->
+        <div id="stock">
+            <h2>Estoque Atual</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome do Produto</th>
+                        <th>Categoria</th>
+                        <th>Quantidade</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Os produtos serão inseridos aqui -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Script para manipulação de abas e carregamento de produtos -->
+    <script>
+        // Função para exibir a aba selecionada e ocultar as outras
+        function mostrarAba(aba) {
+            document.querySelectorAll('div[id]').forEach(div => {
+                if (div.id === aba) {
+                    div.classList.remove('hidden');
+                } else {
+                    div.classList.add('hidden');
+                }
+            });
+
+            // Atualiza o estilo do botão ativo
+            document.querySelectorAll('.tabs button').forEach(button => {
+                if (button.innerText.toLowerCase().includes(aba)) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+        }
+
+        // Função para carregar os produtos no estoque
+        function carregarEstoque() {
+            let produtos = [
+                { nome: "Hamburguete com Cheddar", categoria: "Alimentos", quantidade: 25 },
+                { nome: "Mini Pizza de Queijo", categoria: "Alimentos", quantidade: 30 },
+                { nome: "Croissant", categoria: "Alimentos", quantidade: 15 },
+                { nome: "Croissant-Chocolate", categoria: "Alimentos", quantidade: 10 },
+                { nome: "Esfiha", categoria: "Alimentos", quantidade: 20 },
+                { nome: "Empada", categoria: "Alimentos", quantidade: 12 },
+                { nome: "Enroladinho de Salsicha", categoria: "Alimentos", quantidade: 18 },
+                { nome: "Mini Pizza (Chocolate)", categoria: "Alimentos", quantidade: 22 },
+                { nome: "Paçoca", categoria: "Alimentos", quantidade: 50 },
+                { nome: "Mini Pizza de Brigadeiro", categoria: "Alimentos", quantidade: 35 },
+                { nome: "Suco del valle de 500ml", categoria: "Bebidas", quantidade: 40 },
+                { nome: "Água tônica", categoria: "Bebidas", quantidade: 28 },
+                { nome: "Schweppes", categoria: "Bebidas", quantidade: 33 },
+                { nome: "H2O", categoria: "Bebidas", quantidade: 45 }
+            ];
+
+            let tabela = document.querySelector("#stock tbody");
+            tabela.innerHTML = ''; // Limpa a tabela antes de preencher
+
+            produtos.forEach(produto => {
+                let status = produto.quantidade > 0 ? "Disponível" : "Esgotado";
+                let statusClass = produto.quantidade > 0 ? "status-disponivel" : "status-esgotado";
+
+                tabela.innerHTML += `
+                    <tr>
+                        <td>${produto.nome}</td>
+                        <td>${produto.categoria}</td>
+                        <td>${produto.quantidade}</td>
+                        <td><span class="status ${statusClass}">${status}</span></td>
+                    </tr>
+                `;
+            });
+        }
+
+        // Carregar estoque ao iniciar a página
+        window.onload = function() {
+            carregarEstoque();
+        };
+    </script>
+</body>
+</html>

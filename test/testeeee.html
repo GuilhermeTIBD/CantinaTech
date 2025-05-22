@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cantina CEUNSP - Sistema Completo</title>
+  <style>
+    :root {
+      --cor-primaria: #004080;
+      --cor-secundaria: #e0f0ff;
+      --cor-fundo: #f9f9f9;
+      --cor-sucesso: #2e7d32;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--cor-fundo);
+    }
+    header {
+      background-color: var(--cor-primaria);
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+    }
+    .produto-lista, .carrinho, .formulario {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+    .produto-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #ddd;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      background-color: var(--cor-primaria);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #003060;
+    }
+    select, input {
+      margin-top: 0.5rem;
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    .sucesso {
+      background-color: var(--cor-secundaria);
+      padding: 1rem;
+      border-radius: 8px;
+      color: var(--cor-sucesso);
+      font-weight: bold;
+    }
+    @media (max-width: 600px) {
+      .produto-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .produto-item button {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Cantina CEUNSP</h1>
+  <p>Agendamento e Pagamento Online</p>
+</header>
+
+<main id="app"></main>
+
+<script>
+  // Dados dos produtos (simulando banco de dados)
+  const produtosDB = [
+    { id: 1, nome: "Coxinha", preco: 5.00 },
+    { id: 2, nome: "Pastel", preco: 6.00 },
+    { id: 3, nome: "Refrigerante", preco: 4.00 },
+    { id: 4, nome: "Suco Natural", preco: 7.50 },
+    { id: 5, nome: "Pão de Queijo", preco: 3.50 }
+  ];
+
+  let carrinho = [];
+
+  function render() {
+    const app = document.getElementById("app");
+    app.innerHTML = `
+      ${renderProdutos()}
+      ${renderCarrinho()}
+      ${renderFormulario()}
+    `;
+    addEventos(); // Reatribui eventos após render
+  }
+
+  function renderProdutos() {
+    return `
+      <section class="produto-lista">
+        <h2>Produtos Disponíveis</h2>
+        ${produtosDB.map(prod => `
+          <div class="produto-item">
+            <span>${prod.nome} - R$${prod.preco.toFixed(2)}</span>
+            <button data-id="${prod.id}" class="add-btn">Adicionar</button>
+          </div>
+        `).join('')}
+      </section>
+    `;
+  }
+
+  function renderCarrinho() {
+    const total = carrinho.reduce((soma, item) => soma + item.preco, 0);
+    return `
+      <section class="carrinho">
+        <h2>Seu Carrinho</h2>
+        ${carrinho.length === 0 ? "<p>Carrinho vazio.</p>" : `
+          <ul>
+            ${carrinho.map(item => `<li>${item.nome} - R$${item.preco.toFixed(2)}</li>`).join('')}
+          </ul>
+          <p><strong>Total:</strong> R$${total.toFixed(2)}</p>
+        `}
+      </section>
+    `;
+  }
+
+  function renderFormulario() {
+    return `
+      <section class="formulario">
+        <h2>Agendar Retirada</h2>
+        <label for="horario">Horário:</label>
+        <select id="horario">
+          <option value="10:00">10:00</option>
+          <option value="10:30">10:30</option>
+          <option value="11:00">11:00</option>
+          <option value="11:30">11:30</option>
+        </select>
+
+        <label for="nome">Seu nome:</label>
+        <input type="text" id="nome" placeholder="Digite seu nome"/>
+
+        <button id="finalizar">Finalizar Pedido</button>
+        <div id="mensagem"></div>
+      </section>
+    `;
+  }
+
+  function addEventos() {
+    document.querySelectorAll('.add-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const id = parseInt(e.target.getAttribute('data-id'));
+        const produto = produtosDB.find(p => p.id === id);
+        if (produto) {
+          carrinho.push(produto);
+          render();
+        }
+      });
+    });
+
+    const finalizar = document.getElementById('finalizar');
+    if (finalizar) {
+      finalizar.addEventListener('click', () => {
+        const nome = document.getElementById("nome").value.trim();
+        const horario = document.getElementById("horario").value;
+        const mensagem = document.getElementById("mensagem");
+
+        if (!nome || carrinho.length === 0) {
+          mensagem.innerHTML = `<p style="color:red">Preencha seu nome e adicione produtos!</p>`;
+          return;
+        }
+
+        mensagem.innerHTML = `<div class="sucesso">Pedido de <strong>${nome}</strong> agendado para <strong>${horario}</strong>. Total R$${carrinho.reduce((soma, i) => soma + i.preco, 0).toFixed(2)}. Obrigado!</div>`;
+        carrinho = [];
+        render();
+      });
+    }
+  }
+
+  render();
+</script>
+</body>
+</html>

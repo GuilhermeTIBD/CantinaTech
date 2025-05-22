@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Estoque Avançado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            transition: background-color 0.5s ease;
+        }
+
+        .header {
+            background-color: #2c3e50;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header img {
+            height: 60px;
+            transition: transform 0.3s ease;
+        }
+
+        .header img:hover {
+            transform: scale(1.05);
+        }
+
+        .menu {
+            width: 240px;
+            background-color: #34495e;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.3);
+            z-index: 5;
+        }
+
+        .menu ul {
+            list-style: none;
+            padding-left: 10px;
+        }
+
+        .menu ul li {
+            margin-bottom: 15px;
+        }
+
+        .menu ul li a {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+            position: relative;
+        }
+
+        .menu ul li a:hover {
+            background-color: #1abc9c;
+        }
+
+        .menu ul li a i {
+            margin-right: 15px;
+            font-size: 1.2em;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 40px;
+            min-height: 100vh;
+            transition: margin-left 0.3s ease;
+        }
+
+        .greeting {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .greeting h2 {
+            font-size: 26px;
+            color: #2c3e50;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 6px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .card i {
+            font-size: 40px;
+            color: #1abc9c;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 22px;
+            color: #333;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        th {
+            background-color: #34495e;
+            color: #fff;
+            padding: 12px;
+        }
+
+        td {
+            background-color: #fff;
+            padding: 12px;
+            text-align: center;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover td {
+            background-color: #f1f1f1;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        form input,
+        form select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            transition: border-color 0.3s ease;
+        }
+
+        form input:focus,
+        form select:focus {
+            border-color: #1abc9c;
+            outline: none;
+        }
+
+        button {
+            background-color: #1abc9c;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #16a085;
+        }
+
+        /* Search Bar */
+        .search-bar {
+            margin: 20px 0;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .search-bar input {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            width: 300px;
+        }
+
+        .search-bar button {
+            padding: 10px;
+            margin-left: 10px;
+            border: none;
+            background-color: #1abc9c;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .search-bar button:hover {
+            background-color: #16a085;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Media Queries for Responsive Design */
+        @media (max-width: 768px) {
+            .menu {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .search-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .search-bar input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <img src="img/Slide1__1_-removebg-preview.png" alt="Logo">
+        <h1>Sistema de Estoque Avançado</h1>
+        <div class="search-bar">
+            <input type="text" id="searchProduct" placeholder="Pesquisar Produtos...">
+            <button onclick="searchProducts()">Buscar</button>
+        </div>
+    </div>
+
+    <div class="menu">
+        <ul>
+            <li><a href="#" id="dashboardLink"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="#" id="productsLink"><i class="fas fa-box"></i> Gerenciar Produtos</a></li>
+            <li><a href="#" id="stockLink"><i class="fas fa-warehouse"></i> Estoque Atual</a></li>
+            <li><a href="#" id="ordersLink"><i class="fas fa-truck"></i> Pedidos de Fornecedores</a></li>
+            <li><a href="#" id="reportsLink"><i class="fas fa-chart-line"></i> Relatórios</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div id="dashboard" class="active">
+            <div class="greeting">
+                <h2>Bem-vindo ao Sistema de Estoque!</h2>
+                <button onclick="showModal('addProductModal')">Adicionar Produto</button>
+            </div>
+            <div class="cards">
+                <div class="card">
+                    <i class="fas fa-box"></i>
+                    <h3>Total de Produtos: <span id="totalProducts">129</span></h3>
+                </div>
+                <div class="card">
+                    <i class="fas fa-truck"></i>
+                    <h3>Pedidos Pendentes: <span id="pendingOrders">3</span></h3>
+                </div>
+                <div class="card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Vendas do Mês: <span id="monthlySales">R$ 3,902</span></h3>
+                </div>
+                <div class="card">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Configurações</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gerenciar Produtos Section -->
+        <div id="products" class="hidden">
+            <h2>Gerenciar Produtos</h2>
+            <table id="productTable">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Preço</th>
+                        <th>Quantidade</th>
+                        <th>Categoria</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Produtos serão adicionados aqui -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Estoque Atual Section -->
+        <div id="stock" class="hidden">
+            <h2>Estoque Atual</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Localização</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Estoque atual será adicionado aqui -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pedidos de Fornecedores Section -->
+        <div id="orders" class="hidden">
+            <h2>Pedidos de Fornecedores</h2>
+            <form id="orderForm">
+                <label for="orderSupplier">Fornecedor:</label>
+                <input type="text" id="orderSupplier" placeholder="Nome do Fornecedor" required>
+
+                <label for="orderProduct">Produto:</label>
+                <input type="text" id="orderProduct" placeholder="Produto solicitado" required>
+
+                <label for="orderQuantity">Quantidade:</label>
+                <input type="number" id="orderQuantity" placeholder="Quantidade solicitada" required>
+
+                <label for="orderDate">Data do Pedido:</label>
+                <input type="date" id="orderDate" required>
+
+                <button type="submit">Adicionar Pedido</button>
+            </form>
+            <table id="orderTable">
+                <thead>
+                    <tr>
+                        <th>Fornecedor</th>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Data do Pedido</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Pedidos serão adicionados aqui -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Relatórios Section -->
+        <div id="reports" class="hidden">
+            <h2>Relatórios</h2>
+            <p>Aqui você pode visualizar relatórios detalhados sobre o estoque e vendas.</p>
+            <!-- Implementar gráficos e relatórios mais tarde -->
+        </div>
+
+        <!-- Modal para Adicionar Produto -->
+        <div id="addProductModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('addProductModal')">&times;</span>
+                <h2>Adicionar Produto</h2>
+                <form id="productForm">
+                    <label for="productName">Nome do Produto:</label>
+                    <input type="text" id="productName" placeholder="Digite o nome do produto" required>
+
+                    <label for="productPrice">Preço:</label>
+                    <input type="number" id="productPrice" placeholder="Digite o preço" required>
+
+                    <label for="productStock">Quantidade no Estoque:</label>
+                    <input type="number" id="productStock" placeholder="Digite a quantidade no estoque" required>
+
+                    <label for="productCategory">Categoria:</label>
+                    <select id="productCategory">
+                        <option value="" disabled selected>Selecione a Categoria</option>
+                        <option value="Categoria 1">Categoria 1</option>
+                        <option value="Categoria 2">Categoria 2</option>
+                        <option value="Categoria 3">Categoria 3</option>
+                    </select>
+
+                    <button type="submit">Adicionar Produto</button>
+                </form>
+                <div id="productMessage" style="display: none; margin-top: 10px; color: #1abc9c;"></div>
+            </div>
+        </div>
+
+        <div class="footer">
+            &copy; 2024 Sistema de Estoque Avançado. Todos os direitos reservados.
+        </div>
+    </div>
+
+    <script>
+        // Links e Seções
+        const dashboardLink = document.getElementById('dashboardLink');
+        const productsLink = document.getElementById('productsLink');
+        const stockLink = document.getElementById('stockLink');
+        const ordersLink = document.getElementById('ordersLink');
+        const reportsLink = document.getElementById('reportsLink');
+        const dashboard = document.getElementById('dashboard');
+        const products = document.getElementById('products');
+        const stock = document.getElementById('stock');
+        const orders = document.getElementById('orders');
+        const reports = document.getElementById('reports');
+
+        // Modal
+        const modal = document.getElementById('addProductModal');
+
+        function showSection(section) {
+            dashboard.classList.add('hidden');
+            products.classList.add('hidden');
+            stock.classList.add('hidden');
+            orders.classList.add('hidden');
+            reports.classList.add('hidden');
+            section.classList.remove('hidden');
+        }
+
+        dashboardLink.onclick = () => showSection(dashboard);
+        productsLink.onclick = () => showSection(products);
+        stockLink.onclick = () => showSection(stock);
+        ordersLink.onclick = () => showSection(orders);
+        reportsLink.onclick = () => showSection(reports);
+
+        // Manipulação do Modal
+        function showModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Formulário de Produto
+        document.getElementById('productForm').onsubmit = (event) => {
+            event.preventDefault();
+            const productName = document.getElementById('productName').value;
+            const productPrice = document.getElementById('productPrice').value;
+            const productStock = document.getElementById('productStock').value;
+            const productCategory = document.getElementById('productCategory').value;
+
+            const productTable = document.getElementById('productTable').getElementsByTagName('tbody')[0];
+            const newRow = productTable.insertRow();
+
+            newRow.innerHTML = `<td>${productName}</td><td>${productPrice}</td><td>${productStock}</td><td>${productCategory}</td>
+                                <td>
+                                    <button onclick="editProduct(this)">Editar</button>
+                                    <button onclick="deleteProduct(this)">Excluir</button>
+                                </td>`;
+
+            // Atualizando Total de Produtos
+            updateProductCount();
+
+            document.getElementById('productForm').reset();
+            closeModal('addProductModal');
+            displayMessage('Produto adicionado com sucesso!');
+        };
+
+        // Funções para Editar e Excluir Produtos
+        function editProduct(button) {
+            const row = button.parentElement.parentElement;
+            const productName = row.cells[0].innerText;
+            const productPrice = row.cells[1].innerText;
+            const productStock = row.cells[2].innerText;
+            const productCategory = row.cells[3].innerText;
+
+            document.getElementById('productName').value = productName;
+            document.getElementById('productPrice').value = productPrice;
+            document.getElementById('productStock').value = productStock;
+            document.getElementById('productCategory').value = productCategory;
+
+            closeModal('addProductModal');
+            row.remove();
+            updateProductCount();
+            displayMessage('Produto editado com sucesso!');
+        }
+
+        function deleteProduct(button) {
+            const row = button.parentElement.parentElement;
+            row.remove();
+            updateProductCount();
+            displayMessage('Produto excluído com sucesso!');
+        }
+
+        function updateProductCount() {
+            const productCount = document.getElementById('productTable').getElementsByTagName('tbody')[0].rows.length;
+            document.getElementById('totalProducts').innerText = productCount;
+        }
+
+        // Sistema de Busca
+        function searchProducts() {
+            const searchTerm = document.getElementById('searchProduct').value.toLowerCase();
+            const productTable = document.getElementById('productTable').getElementsByTagName('tbody')[0];
+            const rows = productTable.getElementsByTagName('tr');
+
+            for (let i = 0; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                let found = false;
+                for (let j = 0; j < cells.length; j++) {
+                    if (cells[j].innerText.toLowerCase().includes(searchTerm)) {
+                        found = true;
+                        break;
+                    }
+                }
+                rows[i].style.display = found ? '' : 'none';
+            }
+        }
+
+        // Exibição de Mensagens
+        function displayMessage(message) {
+            const messageBox = document.getElementById('productMessage');
+            messageBox.innerText = message;
+            messageBox.style.display = 'block';
+            setTimeout(() => {
+                messageBox.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>

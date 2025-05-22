@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Pagamento - PIX</title>
+    <link rel="stylesheet" href="/src/style.css">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #1e1e1e, #2b2b2b);
+            color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        h1 {
+            color: #f39c12;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+            margin-bottom: 20px;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            background: rgba(30, 30, 30, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: radial-gradient(circle, rgba(243, 156, 18, 0.15) 20%, transparent 40%);
+            filter: blur(50px);
+            z-index: 0;
+            opacity: 0.8;
+        }
+        .container > * {
+            position: relative;
+            z-index: 1;
+            width: 48%;
+            padding: 20px;
+        }
+        .total {
+            font-size: 1.8rem;
+            margin: 20px 0;
+            font-weight: bold;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+        }
+        button {
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        button:hover {
+            background-color: #e67e22;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7);
+        }
+        img {
+            border: 2px solid #f39c12;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            margin: 20px 0;
+            animation: scaleIn 0.5s ease-in-out;
+            max-width: 100%; /* Garantir que a imagem não ultrapasse a largura do contêiner */
+        }
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <h1>Página de Pagamento</h1>
+            <p class="total">Total a Pagar: R$ <span id="valor-total">0.00</span></p>
+            
+            <h2>Pagamento via PIX</h2>
+            <br>
+            <p>Por favor, faça o pagamento para a seguinte chave PIX:</p>
+            <br>
+            <br>
+            Chave PIX: 
+            <p><strong id="chavePix">Guilhermebarretofns@gmail.com</strong></p>
+            <br>
+            <button onclick="copiarTexto()">Copiar</button>
+            
+            <script>
+            function copiarTexto() {
+                var texto = document.getElementById("chavePix").innerText;
+                var inputTemporario = document.createElement("input");
+                inputTemporario.value = texto;
+                document.body.appendChild(inputTemporario);
+                inputTemporario.select();
+                document.execCommand("copy");
+                document.body.removeChild(inputTemporario);
+                alert("Texto copiado: " + texto);
+            }
+            </script>
+                        <br>
+            <br>
+
+            <button onclick="confirmarPagamento()">Confirmar Pagamento</button>
+        </div>
+        <div class="right">
+            <!-- Imagem do QR Code -->
+            <img src="/img/qr.jpeg" alt="QR Code" />
+        </div>
+    </div>
+
+    <script>
+        // Função para obter o total da URL
+        function getTotalFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('total');
+        }
+
+        // Atualiza o valor total na página
+        function atualizarValorTotal() {
+            const total = getTotalFromURL();
+            document.getElementById('valor-total').textContent = total || "0.00";
+        }
+
+        // Função para confirmar o pagamento
+        function confirmarPagamento() {
+            const total = getTotalFromURL();
+            if (total) {
+                const confirmacao = confirm(`Você realizou o pagamento de R$ ${total}?`);
+                if (confirmacao) {
+                    window.location.href = "agradecimento.html"; // Redireciona para a página de agradecimento
+                }
+            } else {
+                alert("O valor total não foi encontrado.");
+            }
+        }
+
+        // Chama as funções ao carregar a página
+        atualizarValorTotal();
+    </script>
+</body>
+</html>

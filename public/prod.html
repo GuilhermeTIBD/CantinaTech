@@ -1,0 +1,499 @@
+<?php 
+session_start();
+include_once('config.php');
+//print_r($_SESSION);
+if((!isset($_SESSION['RA']) == true) and (!isset ($_SESSION['Digito']) == true))
+{
+    unset($_SESSION['RA']);
+    unset($_SESSION['Digito']);
+    header('Location: tela_cadastro.php');
+}
+$logado = $_SESSION['RA'];
+
+if(!empty($_GET['search']))
+{
+    $data = $_GET['search'];
+    $sql = "SELECT * FROM alunos WHERE Nome LIKE '%$data%' or RA LIKE '%$data%' or Digito LIKE '%$data%'";
+}
+else
+{
+   $sql = "SELECT * FROM alunos ";
+}?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primaria: #f39c12;
+            --secundaria: #0d0d0d;
+            --fundo: #f4f4f4;
+            --clara: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: var(--fundo);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--secundaria);
+            color: #fff;
+            padding: 0.5rem 1rem; /* Diminuído */
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* Diminuído */
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background 0.3s ease;
+        }
+
+        header.scrolled {
+            background: #111;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 2rem auto 0; /* Ajuste a margem superior para descer mais o container */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem; /* Diminuído */
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .logo-img {
+            width: 147px; /* Ajustado */
+            height: 100px; /* Ajustado */
+            margin-right: 0.5rem; /* Ajustado */
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem; /* Reduzido */
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.875rem; /* Diminuído */
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 0.25rem; /* Ajustado */
+        }
+
+        nav ul li a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: var(--primaria);
+            transition: width 0.3s ease;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        #boasvindas {
+            background-color: var(--primaria);
+            color: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px auto;
+            width: fit-content;
+            font-size: 1.5rem; /* Diminuído */
+        }
+
+        #carrinho {
+            background-color: var(--clara);
+            color: #000;
+            border-radius: 10px;
+            padding: 10px; /* Diminuído */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Diminuído */
+            max-width: 300px; /* Diminuído */
+            width: 90%;
+            margin: 20px auto;
+        }
+
+        #carrinho h2 {
+            text-align: center;
+            margin-bottom: 10px; /* Diminuído */
+        }
+
+        #lista-itens-carrinho {
+            list-style: none;
+            padding: 0;
+        }
+
+        #lista-itens-carrinho li {
+            margin-bottom: 5px; /* Diminuído */
+        }
+
+        #total-carrinho {
+            font-weight: bold;
+            display: block;
+            text-align: center;
+            margin: 10px 0; /* Diminuído */
+        }
+
+        button {
+            background-color: var(--primaria);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #e67e22;
+        }
+
+        .popup-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--clara);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .popup-container h2 {
+            margin-top: 0;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn-container button {
+            padding: 10px 20px;
+            background-color: var(--primaria);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        .btn-container button:hover {
+            background-color: #e67e22;
+        }
+
+        .lista_produtos {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .produto_item {
+            background-color: var(--secundaria);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 15px; /* Diminuído */
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .produto_item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        .produto_item img {
+            border-radius: 10px;
+            width: 100%;
+            height: 150px; /* Diminuído */
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .produto_item:hover img {
+            transform: scale(1.1);
+        }
+
+        .produto_item h2 {
+            margin-top: 10px; /* Diminuído */
+            font-size: 16px; /* Diminuído */
+        }
+
+        .produto_item h4 {
+            margin: 5px 0; /* Diminuído */
+            font-size: 14px; /* Diminuído */
+            color: #ccc;
+        }
+    </style>
+    <script>
+        let carrinho = [];
+
+        function adicionarAoCarrinho(nome, preco) {
+            carrinho.push({ nome: nome, preco: preco });
+            atualizarCarrinho();
+        }
+
+        function atualizarCarrinho() {
+            const listaItensCarrinho = document.getElementById("lista-itens-carrinho");
+            const totalCarrinho = document.getElementById("total-carrinho");
+
+            listaItensCarrinho.innerHTML = "";
+            let total = 0;
+
+            carrinho.forEach(item => {
+                const listItem = document.createElement("li");
+                listItem.textContent = `${item.nome} - R$ ${item.preco.toFixed(2)}`;
+                listaItensCarrinho.appendChild(listItem);
+                total += item.preco;
+            });
+
+            totalCarrinho.textContent = total.toFixed(2);
+        }
+
+        function irParaPagamento() {
+            let total = carrinho.reduce((acc, item) => acc + item.preco, 0);
+            console.log('Valor total do carrinho:', total);
+            window.location.href = `pagina_pagamento.html?total=${total}`;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="/img/android-chrome-512x512.png" alt="Logo" class="logo-img">
+                <h3 style="color: white;">Produtos</h3>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="INICIOlogin.html">Inicio</a></li>
+                    <li><a href="SobreNós.html">Sobre Nós (Contato)</a></li>
+                    <li><a href="NossoAplicativo.html" class="hover:text-yellow-500 transition active">Nosso Aplicativo</a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+   
+
+    <div class="container">
+        <div id="boasvindas">Doces, Salgados e Bebidas é com a gente!</div>
+        <div id="carrinho">
+            <h2>Carrinho</h2>
+            <ul id="lista-itens-carrinho"></ul>
+            <p>Total: R$ <span id="total-carrinho">R$0.00</span></p>
+            <button onclick="irParaPagamento()">Ir para o Pagamento</button>
+        </div>
+    </div>
+    
+    <div class="lista_produtos">
+        <div class="produto_item">
+            <img src="/img/hamburguete.png" alt="Hamburguete com Cheddar">
+            <h2>Hamburguete com Cheddar</h2>
+            <h4>R$7,99</h4>
+         <?php  include_once('tstest.php');?>
+         <?php  include_once('Hamburguete_Chedar.php');?>
+
+            <button onclick="adicionarAoCarrinho('Hamburguete com Cheddar', 7.99)">Adicionar ao Carrinho</button>
+        </div>
+        
+
+        <div class="produto_item">
+            <img src="/img/pizza-queijo-e-presunto-1-scaled.jpg" alt="Mini Pizza de Queijo">
+            <h2>Mini Pizza de Queijo</h2>
+            <h4>R$5,99</h4>
+            <?php  include_once('Mini_Pizza_Queijo.php');?>
+
+            <button onclick="adicionarAoCarrinho('Mini Pizza de Queijo', 5.99)">Adicionar ao Carrinho</button>
+        </div>
+
+        <div class="produto_item">
+            <img src="/img/croissant-na-airfryer.jpg" alt="Croissant">
+            <h2>Croissant</h2>
+            <h4>R$7,99</h4>
+            <?php  include_once('Croissant.php');?>
+
+            <button onclick="adicionarAoCarrinho('Croissant', 7.99)">Adicionar ao Carrinho</button>
+        </div>
+
+        <div class="produto_item">
+            <img src="/img/download.jpg" alt="Croissant-Chocolate">
+            <h2>Croissant-Chocolate</h2>
+            <h4>R$9,99</h4>
+            <?php  include_once('Croissant_Chocolate.php');?>
+
+            <button onclick="adicionarAoCarrinho('Croissant-Chocolate', 9.99)">Adicionar ao Carrinho</button>
+        </div>
+
+        <div class="produto_item">
+            <img src="/img/es_1_-removebg-preview.png" alt="Esfiha">
+            <h2>Esfiha</h2>
+            <h4>R$5,99</h4>
+            <?php  include_once('Esfiha.php');?>
+
+            <button onclick="adicionarAoCarrinho('Esfiha', 5.99)">Adicionar ao Carrinho</button>
+        </div>
+
+        <div class="produto_item">
+            <img src="/img/download (10).jpg" alt="Empada">
+            <h2>Empada</h2>
+            <h4>R$3,99</h4>
+            <?php  include_once('Empada.php');?>
+
+            <button onclick="adicionarAoCarrinho('Empada', 3.99)">Adicionar ao Carrinho</button>
+        </div>
+
+        <div class="produto_item">
+            <img src="/img/enrolado(10).jpg" alt="Enroladinho de Salsicha">
+            <h2>Enroladinho de Salsicha</h2>
+            <h4>R$4,99</h4>
+            <?php  include_once('Enrolado_Salsicha.php');?>
+
+            <button onclick="adicionarAoCarrinho('Enroladinho de Salsicha', 4.99)">Adicionar ao Carrinho</button>
+        </div>
+
+        <div class="produto_item">
+            <img src="/img/pizza.jpg" alt="Mini Pizza (Chocolate)">
+            <h2>Mini Pizza (Chocolate)</h2>
+            <h4>R$5,99</h4>
+            <?php  include_once('Mini_Pizza_Chocolate.php');?>
+            <button onclick="adicionarAoCarrinho('Mini Pizza (Chocolate)', 5.99)">Adicionar ao Carrinho</button>
+        </div>
+
+        <div class="produto_item">
+            <img src="/img/images.jpg" alt="Paçoca">
+            <h2>Paçoca</h2>
+            <h4>R$1,99</h4>
+            <?php  include_once('Paçoca.php');?>
+
+            <button onclick="adicionarAoCarrinho('Paçoca', 1.99)">Adicionar ao Carrinho</button>
+        </div>
+
+        <div class="produto_item">
+            <img src="/img/pizza-de-brigadeiro-2.jpeg" alt="Mini Pizza de Brigadeiro">
+            <h2>Mini Pizza de Brigadeiro</h2>
+            <h4>R$5,99</h4>
+            <?php  include_once('Mini_Pizza_Brigadeiro.php');?>
+
+            <button onclick="adicionarAoCarrinho('Mini Pizza de Brigadeiro', 5.99)">Adicionar ao Carrinho</button>
+        </div>
+
+        <div class="produto_item">
+            <img src="/img/download__2_-removebg-preview.png" alt="Suco del valle de 500ml">
+            <h2>Suco del valle de 500ml</h2>
+            <h4>R$3,99</h4>
+            <?php  include_once('Suco_Dell_Valle.php');?>
+
+            <button onclick="adicionarAoCarrinho('Suco del valle de 500ml', 3.99)">Adicionar ao Carrinho</button>
+        </div>
+
+        <div class="produto_item">
+            <img src="/img/download__10_-removebg-preview.png" alt="Água tônica">
+            <h2>Água tônica</h2>
+            <h4>R$5,99</h4>
+            <?php  include_once('Agua_Tonica.php');?>
+
+            <button onclick="adicionarAoCarrinho('Água tônica', 5.99)">Adicionar ao Carrinho</button>
+        </div>
+
+        <div class="produto_item">
+            <img src="/img/download__11_-removebg-preview.png" alt="schweppes">
+            <h2>schweppes</h2>
+            <h4>R$6,99</h4>
+            <?php  include_once('Schweppes.php');?>
+
+            <button onclick="adicionarAoCarrinho('schweppes', 6.99)">Adicionar ao Carrinho</button>
+        </div>
+
+        <div class="produto_item">
+            <img src="/img/download__12_-removebg-preview.png" alt="H2O">
+            <h2>H2O</h2>
+            <h4>R$6,99</h4>
+            <?php  include_once('H2O.php');?>
+
+            <button onclick="adicionarAoCarrinho('H2O', 6.99)">Adicionar ao Carrinho</button>
+        </div>
+    </div>
+
+    <div class="overlay"></div>
+    <div class="popup-container" id="popup-carrinho">
+        <h2>Seu Carrinho</h2>
+        <ul id="popup-lista-itens-carrinho"></ul>
+        <p>Total: R$ <span id="popup-total-carrinho">0.00</span></p>
+        <div class="btn-container">
+            <button onclick="fecharPopup()">Fechar</button>
+            <button onclick="irParaPagamento()">Ir para o Pagamento</button>
+        </div>
+    </div>
+
+    <script src="/js/script.js">
+        
+
+    </script>
+    
+
+
+    <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+
+</body>
+</html>

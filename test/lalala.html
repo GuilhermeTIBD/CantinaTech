@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Cantina Gigio</title>
+    
+    <link rel="icon" href="images/icon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="lilili.css">
+    <style>
+        /* Estilos de imagem responsiva */
+        .background-image {
+            width: 100%;
+            height: auto;
+            display: none;
+        }
+
+        .background-image.active {
+            display: block;
+        }
+
+        /* Estilos para garantir que as imagens no cardápio se ajustem corretamente */
+        .height-imagem {
+            height: auto;
+            max-height: 350px;
+        }
+
+        /* Ajustes gerais de responsividade */
+        @media (max-width: 768px) {
+            .botao-marrom {
+                padding: 10px 20px;
+            }
+            .texto-corrido {
+                font-size: 14px;
+            }
+            .navbar-nav .nav-item {
+                margin-left: 0;
+            }
+        }
+
+        /* Fundo preto para o site */
+        body {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .texto-corrido, .navbar-nav .nav-link {
+            color: #fff;
+        }
+
+        .navbar-light .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .navbar-light .navbar-nav .nav-link:hover {
+            color: rgba(255, 255, 255, 0.75);
+        }
+        #home {
+    background: url('images/restaurant.jpg') no-repeat center center;
+    background-size: cover;
+    color: white;
+    text-align: center;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: fadeIn 3s;
+}
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+#background-images {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease;
+    filter: brightness(60%); /* Ajuste o valor conforme necessário para diminuir o brilho */
+}
+
+    </style>
+</head>
+<body>
+<header>
+<div class="col-md-12 py-2" style="height: 30px; width: 100%; padding: 30px; background-color: #9c0f0f;">
+    <p style="font-size: 12px; text-align: right; color: #ff7b00; margin-right: 18%; font-family: 'Montserrat', sans-serif;">
+        <i class="fas fa-map-pin"></i> RUA DOS PINHEIROS, 355
+        <i class="fas fa-phone-alt"></i> (11) 3069-9000
+        <a href="https://www.instagram.com/cantinagigio/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/cantinagigio/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+    </p>
+</div>
+<nav class="navbar navbar-expand-lg navbar-light" id="navbar_top" style="background-color: #000">
+  <div class="container-fluid">
+    <a class="navbar-brand mx-auto" href="index.html"><img src="img/Slide1__1_-removebg-preview.png" height="70px"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+            <li class="nav-item active ms-5">
+            <a class="nav-link" href="index.html">HOME</a>
+            </li>
+            <li class="nav-item ms-5">
+            <a class="nav-link" href="cardapios.html">CARDÁPIOS</a>
+            </li>
+            <li class="nav-item ms-5">
+            <a class="nav-link" href="casa.html">NOSTRA CASA</a>
+            </li>
+            <li class="nav-item ms-5">
+            <a class="nav-link" href="eventos.html">SEU EVENTO</a>
+            </li>
+            <li class="nav-item ms-5">
+            <a class="nav-link" href="reserva.html">RESERVA</a>
+            </li>
+            <li class="nav-item ms-5">
+            <a class="nav-link" href="delivery.html">DELIVERY</a>
+            </li>
+            <li class="nav-item ms-5">
+            <a class="nav-link" href="contato.html">FALE CONOSCO</a>
+            </li>
+        </ul>
+    </div>
+  </div>
+</nav>
+</header>
+
+<section id="home">
+    <div id="background-images">
+        <img src="images/restaurant.jpg" class="background-image active">
+        <img src="images/iiiioo.jpg" class="background-image">
+        <!-- Adicione mais imagens conforme necessário -->
+    </div>
+    <div class="text-content">
+        <h1>Bem-vindo à Cantina Rlt</h1>
+        <p>A Cantina mais Completa pra você.</p>
+    </div>
+</section>
+<div class="col-md-12 benvenuto"></div>
+
+<article id="historia">
+    <div class="container col-md-12 bloco-txt">
+        <center>
+            <h1>NOSTRA STORIA</h1>
+            <p class="texto-corrido">Desde a década de 80, com nova administração, permanecemos com o mesmo carinho e o objetivo de manter o inconfundível paladar da culinária e suas agradáveis lembranças, assim como o fato de receber as diferentes gerações em um ambiente muito familiar para todos.</p>
+            <a href="casa.html"><button type="button" class="btn btn-primary botao-marrom" style="background-color: #A57C52; border: none; border-radius: 0; padding: 20px 50px; margin-top: 20px;">LER MAIS</button></a>
+        </center>
+    </div>
+</article>
+
+<article id="chamada" class="col-md-12">
+    <div class="row">
+        <div class="col-md-6 height-imagem" style="background-image: url('images/cardapio1.jpg'); background-size: cover; background-position: center; background-repeat:no-repeat; height: 350px;"></div>
+        <div class="col-md-6 txt-right" style="background-color: #F6F2EE">
+            <h1>CONHEÇA NOSSO CARDÁPIO</h1>
+            <p class="texto-corrido">Para uma experiência ainda mais completa, confira o nosso cardápio.</p>
+            <a href="cardapios.html"><button type="button" class="btn btn-primary botao-marrom" style="background-color: #A57C52; border: none; border-radius: 0; padding: 20px 50px; margin-top: 20px;">ACESSE AQUI</button></a>
+        </div>
+    </div>
+</article>
+
+<article id="pedido">
+    <center><h1>FAÇA SEU PEDIDO</h1></center>
+    <div class="container">
+        <center>
+            <a href="https://deliveryapp.neemo.com.br/delivery/3413/menu" target="_blank"><img src="images/app.svg" class="card-delivery" width="30%"></a>
+            <a href="https://www.ifood.com.br/delivery/sao-paulo-sp/cantina-gigio-pinheiros-pinheiros/85250e42-1807-4522-a30f-dd4ed14487c0?UTM_Medium=share" target="_blank"><img src="images/delivery-ifood.svg" class="card-delivery" width="30%"></a>
+            <a href="tel:+551130699000"><img src="images/delivery-tel.svg" class="card-delivery" width="30%"></a>
+        </center>   
+    </div>
+</article>
+
+<article id="contato">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>CANTINA GIGIO</h1>
+                <h2 style="margin-top: 30px;">HORÁRIO DE FUNCIONAMENTO</h2>
+                <p class="texto-corrido"><strong>Restaurante & Delivery</strong><br>Domingo a Quinta, das 11h30 às 22h<br>Sexta a Sábado, das 11h30 às 00h</p>
+                <p class="texto-corrido"><strong>Telefone:</strong><br>11 3069-9000</p>
+                
+                <div class="col-md-5 row gx-5 mt-4">
+                    <div class="col"><a href="https://www.instagram.com/cantinagigio/" target="_blank"><h1><i class="fab fa-instagram"></i></h1></a></div>
+                    <div class="col"><a href="https://www.facebook.com/cantinagigio/" target="_blank"><h1><i class="fab fa-facebook-f"></i></h1></a></div>
+                    <div class="col"><a href="https://www.tripadvisor.com.br/Restaurant_Review-g303631-d3357039-Reviews-Cantina_Gigio-Sao_Paulo_State_of_Sao_Paulo.html?m=19905" target="_blank"><h1><i class="fab fa-tripadvisor"></i></h1></a></div>
+                </div>
+            
+            </div>
+            <div class="col-md-6">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.0883194804373!2d-46.68378608445362!3d-23.56527126762317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5777c33a5d03%3A0xd8c849f23ef3baf0!2sCantina%20Gigio!5e0!3m2!1spt-BR!2sbr!4v1626790262938!5m2!1spt-BR!2sbr" width="100%" height="340" style="border:1px solid #A57C52;" allowfullscreen="" loading="lazy"></iframe>
+                <p class="texto-corrido">R. dos Pinheiros, 355 - Pinheiros, São Paulo - SP, 05422-010</p>
+            </div>
+        </div>
+    </div>
+</article>
+
+<article id="bottom">
+    <center>
+        <div class="row p-0 m-0">
+            <div class="col-md-8"><p class="txt-pequeno">CANTINA GIGIO | TODOS OS DIREITOS RESERVADOS ©</p></div>
+            <div class="col-md-3"><img src="images/logotre.svg" width="30px"></div>
+        </div>
+    </center>
+</article>
+    
+<!--BACK TO TOP-->
+<a href="#"><div class="back-top" id="up"><img src="images/up.svg" width="50px"></div></a>     
+      
+<!--SCRIPTS-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3M IykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/38c7fc1a36.js" crossorigin="anonymous"></script>
+<script src="js.js"></script>
+<script src="script.js"></script>
+<script>
+$(document).ready(function () {
+  $(".navbar-nav li a").click(function(event) {
+    $(".navbar-collapse").collapse('hide');
+  });
+});
+$(document).ready(function() {
+            const images = document.querySelectorAll(".background-image");
+            let currentIndex = 0;
+
+            function showImage(index) {
+                images.forEach((image, i) => {
+                    if (i === index) {
+                        image.classList.add("active");
+                    } else {
+                        image.classList.remove("active");
+                    }
+                });
+            }
+
+            function nextImage() {
+                currentIndex = (currentIndex + 1) % images.length;
+                showImage(currentIndex);
+            }
+
+            function prevImage() {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                showImage(currentIndex);
+            }
+
+            // Intervalo para trocar as imagens automaticamente
+            setInterval(nextImage, 5000);
+        });
+</script>
+<script type="text/javascript" src="https://form.jotform.com/jsform/242905324215046"></script>
+</body>
+</html>

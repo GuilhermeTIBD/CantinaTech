@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agradecimento - Pagamento Recebido</title>
+    <style>
+        :root {
+            --primaria: #f39c12;
+            --fundo: #1e1e1e;
+            --clara: #f4f4f4;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: var(--fundo);
+            color: var(--clara);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: var(--primaria);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(30, 30, 30, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .codigo-retirada {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primaria);
+            margin: 20px 0;
+        }
+
+        button {
+            background-color: var(--primaria);
+            color: white;
+            padding: 15px 25px;
+            cursor: pointer;
+            border-radius: 10px;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Obrigado pelo seu Pagamento!</h1>
+        <p>Seu pagamento foi recebido com sucesso. Em breve, você poderá retirar seu pedido.</p>
+        
+        <div class="codigo-retirada" id="codigo-retirada"></div>
+        
+        <button onclick="redirectToHome()">Voltar para a Página Inicial</button>
+    </div>
+
+    <script>
+        // Função para gerar um código de 4 dígitos
+        function gerarCodigoRetirada() {
+            return Math.floor(1000 + Math.random() * 9000); // Gera um número aleatório de 1000 a 9999
+        }
+
+        // Atualiza o código de retirada na página
+        function atualizarCodigoRetirada() {
+            const codigo = gerarCodigoRetirada();
+            document.getElementById('codigo-retirada').textContent = `Código de Retirada: ${codigo}`;
+            
+            // Salva o código no localStorage com status inicial como "pendente"
+            let codigosRetirada = JSON.parse(localStorage.getItem('codigosRetirada')) || [];
+            codigosRetirada.push({ codigo, status: 'pendente' });
+            localStorage.setItem('codigosRetirada', JSON.stringify(codigosRetirada));
+        }
+
+        // Função para redirecionar para a página de gerenciamento
+        function redirectToHome() {
+            window.location.href = "gerenciamento.html"; // Redireciona para a página de gerenciamento
+        }
+
+        // Chama a função para atualizar o código ao carregar a página
+        atualizarCodigoRetirada();
+    </script>
+</body>
+</html>
